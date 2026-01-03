@@ -1,38 +1,22 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import { proofs, type InsertProof, type Proof } from "@shared/schema";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  createProof(proof: InsertProof): Promise<Proof>;
+  getProof(proofId: string): Promise<Proof | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async createProof(insertProof: InsertProof): Promise<Proof> {
+    const [proof] = await db.insert(proofs).values(insertProof).returning();
+    return proof;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async getProof(proofId: string): Promise<Proof | undefined> {
+    const [proof] = await db.select().from(proofs).where(eq(proofs.proofId, proofId));
+    return proof;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
