@@ -1,0 +1,201 @@
+You are an elite full-stack Web3 + AI engineer building a COMPLETE, WORKING, HACKATHON-READY PROJECT
+for the Akindo Wave Hack:
+“Build onchain AI dapps with 0G’s Modular L1”.
+
+DO NOT ASK QUESTIONS.
+DO NOT EXPLAIN YOUR THINKING.
+JUST BUILD EVERYTHING.
+
+====================================================
+PROJECT NAME
+====================================================
+ProofAI Vault
+
+====================================================
+PROJECT SUMMARY
+====================================================
+ProofAI Vault is an onchain AI verification platform that transforms AI-generated outputs
+(text, prompts, or datasets) into cryptographically verifiable proofs.
+
+Each AI result is:
+- Computed by AI
+- Hashed for integrity
+- Stored permanently (0G Storage ready)
+- Committed onchain (0G Chain ready)
+- Mintable as a Proof NFT
+
+This project demonstrates FULL modular usage of:
+- 0G Compute
+- 0G Storage
+- 0G Chain
+- 0G DA
+
+====================================================
+TECH STACK (MANDATORY)
+====================================================
+Backend:
+- Node.js 18+
+- Express
+- OpenAI API (gpt-4o-mini)
+- crypto (SHA-256)
+- dotenv
+
+Frontend:
+- React (or Next.js if preferred)
+- Simple, clean UI
+- Wallet-ready structure (no signing required)
+
+Blockchain:
+- Solidity
+- OpenZeppelin
+- Hardhat-ready contracts
+- NFT-based proof system
+
+====================================================
+WHAT YOU MUST BUILD
+====================================================
+
+--------------------------------
+1️⃣ AI COMPUTE SERVICE
+--------------------------------
+- Accept user prompt or text
+- Send it to OpenAI
+- Receive AI output
+- Attach metadata (model, timestamp)
+
+--------------------------------
+2️⃣ VERIFICATION SYSTEM
+--------------------------------
+- Hash input (SHA-256)
+- Hash AI output (SHA-256)
+- Create a proof object:
+  {
+    proofId,
+    inputHash,
+    outputHash,
+    aiModel,
+    timestamp,
+    storageCID
+  }
+
+--------------------------------
+3️⃣ STORAGE LAYER (0G-READY)
+--------------------------------
+- Simulate 0G Storage
+- Save proofs in JSON or memory
+- Generate mock CID (clearly labeled)
+- Code must be replaceable with real 0G Storage later
+
+--------------------------------
+4️⃣ BLOCKCHAIN DATA PREP
+--------------------------------
+- Return values that smart contracts expect:
+  - inputHash
+  - outputHash
+  - storageCID
+  - timestamp
+- NO private keys
+- NO deployment required
+
+--------------------------------
+5️⃣ SMART CONTRACTS (GENERATE FILES)
+--------------------------------
+Generate Solidity contracts:
+
+A) ProofAnchor.sol
+- Stores immutable proof hashes
+- Emits ProofStored event
+
+B) ProofNFT.sol
+- ERC-721
+- Mints NFT after proof exists
+- Token represents verifiable AI proof
+
+Use OpenZeppelin.
+Contracts must compile in Hardhat.
+
+--------------------------------
+6️⃣ BACKEND API (EXPRESS)
+--------------------------------
+Required endpoints:
+
+POST /api/ai/run
+Input:
+{
+  "prompt": "string"
+}
+
+Output:
+{
+  aiOutput,
+  proofId,
+  inputHash,
+  outputHash,
+  storageCID,
+  timestamp
+}
+
+GET /api/proof/:proofId
+- Returns full proof object
+
+GET /api/health
+- Server status
+
+--------------------------------
+7️⃣ FRONTEND UI
+--------------------------------
+Pages:
+- Home (project intro)
+- Create Proof (input prompt → AI → proof)
+- Verify Proof (paste proofId → verify)
+
+Frontend must:
+- Call backend APIs
+- Display hashes clearly
+- Look clean and professional
+- Be hackathon-ready
+
+--------------------------------
+8️⃣ README.md (MANDATORY)
+--------------------------------
+Explain:
+- What ProofAI Vault is
+- The problem it solves
+- How AI is used
+- How 0G layers are used
+- How to run locally
+- Hackathon positioning
+
+--------------------------------
+9️⃣ HACKATHON STORY SUPPORT
+--------------------------------
+Add comments explaining:
+- Why this is innovative
+- Why this is feasible
+- Why it has real-world utility
+- Why it fits Akindo + 0G judging
+
+====================================================
+RULES
+====================================================
+- Code must RUN
+- No placeholders without comments
+- No broken imports
+- Clean structure
+- Minimal dependencies
+- Stable MVP > fancy features
+
+====================================================
+FINAL INSTRUCTION
+====================================================
+Generate:
+- Backend code
+- Frontend code
+- Smart contracts
+- README
+- Project folder structure
+
+The app must be runnable immediately in Replit by clicking “Run”.
+
+DO NOT ASK QUESTIONS.
+JUST BUILD EVERYTHING.
